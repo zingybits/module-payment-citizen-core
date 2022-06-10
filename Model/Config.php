@@ -38,9 +38,12 @@ class Config implements ConfigInterface
     public const PUBLIC_KEY = 'public_key';
     public const PRIVATE_KEY = 'private_key';
     public const GATEWAY_API_URL = 'gateway_api_url';
+    public const URL_CREATE_SESSION = 'url_create_session';
     public const MERCHANT_EMAIL = 'merchant_email';
     public const CMS_FAILURE_PAGE = 'advanced/cms_payment_failure';
     public const CMS_SUCCESS_PAGE = 'advanced/cms_payment_success';
+    public const URL_CREATE_SESSION_PROD = 'url_create_session_prod';
+    public const URL_CREATE_SESSION_TEST = 'url_create_session_test';
 
 
     /**
@@ -98,5 +101,17 @@ class Config implements ConfigInterface
     {
         return (string) $this->config->getValue(self::CMS_FAILURE_PAGE);
     }
+
+    public function getUrlCreateSessionProd(): string
+    {
+        return (string) $this->config->getValue(self::URL_CREATE_SESSION_PROD);
+    }
+
+    public function getUrlCreateSessionTest(): string
+    {
+        return (string) $this->config->getValue(self::URL_CREATE_SESSION_TEST);
+    }
+
+
 
 }

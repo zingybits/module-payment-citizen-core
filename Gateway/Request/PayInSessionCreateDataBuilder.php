@@ -69,8 +69,9 @@ class PayInSessionCreateDataBuilder implements BuilderInterface
 
         $merchantEmail = $this->config->getMerchantEmail();
 
-        $baseUrl = $this->storeManager->getStore()->getBaseUrl();
-        $callbackUrl = $baseUrl. 'citizen/callback/response';
+        $quoteId = $buildSubject['order']->getQuoteId();
+        $quoteIdMask = $this->quoteIdToMaskedQuoteId->execute($quoteId);
+        $callbackUrl = 'callback/response?hash='.$quoteIdMask;
 
         // todo customerDevise parse $_SERVER useragent
         $customerDeviceOS = 'NA';
@@ -85,14 +86,14 @@ class PayInSessionCreateDataBuilder implements BuilderInterface
         $body = [
             "customerIdentifier" => $customerId,
             "customerEmailAddress" => $customerEmail,
-            "amount" => round($order->getGrandTotalAmount(), 2),
+            "amount" => $order->getGrandTotalAmount(),
             "currency" => $order->getCurrencyCode(),
             "paymentGiro" => "FPS", // payment type (SEPA or FPS)
             "reference" => $order->getOrderIncrementId(),
             "customerDeviceOs" => $customerDeviceOS,
             "customerIpAddress" => $order->getRemoteIp(),
-            "successRedirectUrl" => $callbackUrl.'?status=success',
-            "failureRedirectUrl" => $callbackUrl.'?status=failure'
+            "successRedirectUrl" => $callbackUrl.'&status=success',
+            "failureRedirectUrl" => $callbackUrl.'&status=failure'
         ];
 
         return $body;

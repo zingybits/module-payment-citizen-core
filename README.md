@@ -24,10 +24,15 @@ ZingyBits_CitizenCore module
 
 ### Type 2: Composer
 
-- Install the module composer by running `composer install zingybits/module-payment-citizen-core`
-- enable the module by running `php bin/magento module:enable ZingyBits_CitizenCore`
-- apply database updates by running `php bin/magento setup:upgrade`\*
-- Flush the cache by running `php bin/magento cache:flush`
+ - Make the module available in a composer repository for example:
+    - private repository `repo.magento.com`
+    - public repository `packagist.org`
+    - public github repository as vcs
+ - Add the composer repository to the configuration by running `composer config repositories.repo.magento.com composer https://repo.magento.com/`
+ - Install the module composer by running `composer require zingybits/module-citizencore`
+ - enable the module by running `php bin/magento module:enable ZingyBits_CitizenCore`
+ - apply database updates by running `php bin/magento setup:upgrade`\*
+ - Flush the cache by running `php bin/magento cache:flush`
 
 
 ## Configuration

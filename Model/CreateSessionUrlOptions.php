@@ -44,8 +44,8 @@ class CreateSessionUrlOptions implements \Magento\Framework\Option\ArrayInterfac
     public function toOptionArray()
     {
         return [
-        ['value' => 'https://testapi.paywithcitizen.com/v2', 'label' => 'Test url'],
-        ['value' => 'https://api.paywithcitizen.com/v2', 'label' => 'Production url']
+        ['value' => $this->config->getUrlCreateSessionTest(), 'label' => 'Test url'],
+        ['value' => $this->config->getUrlCreateSessionProd(), 'label' => 'Production url']
         ];
     }
 }

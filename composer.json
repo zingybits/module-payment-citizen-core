@@ -1,15 +1,29 @@
 {
-    "name": "zingybits/module-citizencore",
-    "description": "ZingyBits_CitizenCore module",
+    "name": "zingybits/module-payment-citizen-core",
+    "description": "Citizen payment module for Magento 2 - core part",
     "type": "magento2-module",
+    "version": "1.0.0",
     "license": "GPL-3.0",
+    "require": {
+        "php": ">=7.1.0",
+        "magento/framework": "*",
+        "magento/magento-composer-installer": "*",
+        "magento/module-checkout": "*",
+        "magento/module-config": "*",
+        "magento/module-payment": "*",
+        "magento/module-quote": "*",
+        "magento/module-sales": "*",
+        "magento/module-store": "*",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "ext-openssl": "*"
+    },    
     "authors": [
         {
-            "name": "Mage2Gen",
-            "email": "info@mage2gen.com"
+            "name": "ZingyBits",
+            "email": "zingybits@gmail.com"
         }
     ],
-    "minimum-stability": "dev",
     "autoload": {
         "files": [
             "registration.php"
