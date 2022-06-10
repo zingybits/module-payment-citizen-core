@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+	<default>
+		<payment>
+			<citizen>
+				<active>0</active>
+				<model>ZingyBits\CitizenCore\Model\Payment\Citizen</model>
+				<title>Citizen</title>
+				<allowspecific>0</allowspecific>
+				<group>offline</group>
+				<public_key></public_key>
+				<private_key></private_key>
+				<merchant_email></merchant_email>
+				<gateway_api_url>https://testapi.paywithcitizen.com/v2</gateway_api_url>
+                <advanced>
+                    <cms_payment_failure>citizen/payment/failure</cms_payment_failure>
+                    <cms_payment_success>checkout/onepage/success</cms_payment_success>
+                    <log_all_communication>0</log_all_communication>
+                </advanced>
+			</citizen>
+		</payment>
+	</default>
+</config>

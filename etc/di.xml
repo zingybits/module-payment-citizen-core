@@ -1,0 +1,227 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\Payment\Gateway\Http\ConverterInterface" type="ZingyBits\CitizenCore\Gateway\Http\Converter\JsonToArray" />
+    <preference for="Magento\Payment\Gateway\ConfigInterface" type="ZingyBits\CitizenCore\Api\ConfigInterface" />
+    <preference for="ZingyBits\CitizenCore\Api\ConfigInterface" type="ZingyBits\CitizenCore\Model\Config" />
+
+    <!-- Payment Method Facade configuration -->
+    <virtualType name="CitizenPaymentGatewayFacade" type="Magento\Payment\Model\Method\Adapter">
+        <arguments>
+            <argument name="code" xsi:type="const">ZingyBits\CitizenCore\Gateway\Config\Config::CODE</argument>
+            <argument name="formBlockType" xsi:type="string">Magento\Payment\Block\Form</argument>
+            <argument name="infoBlockType" xsi:type="string">Magento\Payment\Block\Info</argument>
+            <argument name="valueHandlerPool" xsi:type="object">CitizenPaymentGatewayValueHandlerPool</argument>
+            <argument name="commandPool" xsi:type="object">CitizenPaymentGatewayCommandPool</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Configuration reader -->
+    <virtualType name="CitizenPaymentGatewayConfig" type="Magento\Payment\Gateway\Config\Config">
+        <arguments>
+            <argument name="methodCode" xsi:type="const">ZingyBits\CitizenCore\Gateway\Config\Config::CODE</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Custom Payment Logger - stripping out sensitive data -->
+    <virtualType name="CitizenPaymentGatewayLogger" type="Magento\Payment\Model\Method\Logger">
+        <arguments>
+            <argument name="config" xsi:type="object">CitizenPaymentGatewayConfig</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="ZingyBits\CitizenCore\Gateway\Http\Client\Curl">
+        <arguments>
+            <argument name="logger" xsi:type="object">CitizenPaymentGatewayLogger</argument>
+            <argument name="converter" xsi:type="object">ZingyBits\CitizenCore\Gateway\Http\Converter\JsonToArray</argument>
+            <argument name="config" xsi:type="object">CitizenPaymentGatewayConfig</argument>
+        </arguments>
+    </type>
+
+    <!-- Commands structure -->
+    <virtualType name="CitizenPaymentGatewayCommandPool" type="Magento\Payment\Gateway\Command\CommandPool">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="create" xsi:type="string">CitizenPaymentGatewayPaymentCreateCommand</item>
+                <item name="initialize" xsi:type="string">CitizenPaymentPayInSessionCreateCommand</item>
+                <item name="status" xsi:type="string">CitizenPaymentPayInStatusGetCommand</item>
+                <item name="check" xsi:type="string">CitizenPaymentPayInCheckCommand</item>
+                <!--<item name="accountnew" xsi:type="string">CitizenPaymentAccountCreateCommand</item>-->
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Pay-In Session create command -->
+    <virtualType name="CitizenPaymentPayInSessionCreateCommand" type="ZingyBits\CitizenCore\Gateway\Command\ResponseCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">CitizenPaymentPayInSessionCreateRequestBuilderComposite</argument>
+            <argument name="transferFactory" xsi:type="object">CitizenPaymentPayInSessionCreateTransferFactory</argument>
+            <argument name="client" xsi:type="object">ZingyBits\CitizenCore\Gateway\Http\Client\Curl</argument>
+            <argument name="handler" xsi:type="object">CitizenPaymentPayInSessionCreateResponseHandlerComposite</argument>
+            <argument name="validator" xsi:type="object">CitizenPaymentPayInSessionCreateValidator</argument>
+        </arguments>
+    </virtualType>
+    <!-- Pay-In Session create Request Builder -->
+    <virtualType name="CitizenPaymentPayInSessionCreateRequestBuilderComposite" type="Magento\Payment\Gateway\Request\BuilderComposite">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="pay_in_session_create_builder" xsi:type="string">ZingyBits\CitizenCore\Gateway\Request\PayInSessionCreateDataBuilder</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <!-- Pay-In Session create Transfer Factory -->
+    <virtualType name="CitizenPaymentPayInSessionCreateTransferFactory" type="ZingyBits\CitizenCore\Gateway\Http\PaymentTransferFactory">
+        <arguments>
+            <argument name="mapper" xsi:type="object">ZingyBits\CitizenCore\Gateway\Request\Mapper\PayInSessionCreateRequestMapper</argument>
+        </arguments>
+    </virtualType>
+    <!-- Pay-In Session create Response handler -->
+    <virtualType name="CitizenPaymentPayInSessionCreateResponseHandlerComposite" type="Magento\Payment\Gateway\Response\HandlerChain">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="add_new_transaction" xsi:type="string">ZingyBits\CitizenCore\Gateway\Response\AddNewTransactionHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <!-- Pay-In Session create Response Validators  -->
+    <virtualType name="CitizenPaymentPayInSessionCreateValidator" type="Magento\Payment\Gateway\Validator\ValidatorComposite">
+        <arguments>
+            <argument name="validators" xsi:type="array">
+                <item name="gateway_response_valid" xsi:type="string">ZingyBits\CitizenCore\Gateway\Validator\GatewayResponseValidator</item>
+                <item name="response_not_empty" xsi:type="string">ZingyBits\CitizenCore\Gateway\Validator\ResponseNotEmptyValidator</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Pay-In Status command -->
+    <virtualType name="CitizenPaymentPayInStatusGetCommand" type="ZingyBits\CitizenCore\Gateway\Command\ResponseCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">CitizenPaymentPayInStatusGetRequestBuilderComposite</argument>
+            <argument name="transferFactory" xsi:type="object">CitizenPaymentPayInStatusGetTransferFactory</argument>
+            <argument name="client" xsi:type="object">ZingyBits\CitizenCore\Gateway\Http\Client\Curl</argument>
+            <argument name="handler" xsi:type="object">CitizenPaymentPayInStatusGetResponseHandlerComposite</argument>
+            <!--<argument name="validator" xsi:type="object">CitizenPaymentPayInStatusGetValidator</argument>-->
+        </arguments>
+    </virtualType>
+    <!-- Pay-In Status Request Builder -->
+    <virtualType name="CitizenPaymentPayInStatusGetRequestBuilderComposite" type="Magento\Payment\Gateway\Request\BuilderComposite">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="pay_in_status_get_builder" xsi:type="string">ZingyBits\CitizenCore\Gateway\Request\PayInSessionCreateDataBuilder</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <!-- Pay-In Status Transfer Factory -->
+    <virtualType name="CitizenPaymentPayInStatusGetTransferFactory" type="ZingyBits\CitizenCore\Gateway\Http\PaymentTransferFactory">
+        <arguments>
+            <argument name="mapper" xsi:type="object">ZingyBits\CitizenCore\Gateway\Request\Mapper\PayInSessionCreateRequestMapper</argument>
+        </arguments>
+    </virtualType>
+    <!-- Payment Status handler -->
+    <virtualType name="CitizenPaymentPayInStatusGetResponseHandlerComposite" type="Magento\Payment\Gateway\Response\HandlerChain">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="add_new_transaction" xsi:type="string">ZingyBits\CitizenCore\Gateway\Response\AddNewTransactionHandler</item>
+<!--                <item name="save_transaction_data" xsi:type="string">ZingyBits\CitizenCore\Gateway\Response\SaveTransactionIdHandler</item>-->
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Payment Status command -->
+    <virtualType name="CitizenPaymentGatewayPaymentCreateCommand" type="ZingyBits\CitizenCore\Gateway\Command\ResponseCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">CitizenPaymentGatewayCreateRequestBuilderComposite</argument>
+            <argument name="transferFactory" xsi:type="object">CitizenPaymentGatewayCreateTransferFactory</argument>
+            <argument name="client" xsi:type="object">ZingyBits\CitizenCore\Gateway\Http\Client\Curl</argument>
+            <argument name="handler" xsi:type="object">CitizenPaymentGatewayCreateResponseHandlerComposite</argument>
+            <argument name="validator" xsi:type="object">CitizenPaymentCreateValidator</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Payment Status Request Builder -->
+    <virtualType name="CitizenPaymentGatewayCreateRequestBuilderComposite" type="Magento\Payment\Gateway\Request\BuilderComposite">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="payment_id_builder" xsi:type="string">ZingyBits\CitizenCore\Gateway\Request\PaymentInitDataBuilder</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Payment Status Transfer Factory -->
+    <virtualType name="CitizenPaymentGatewayCreateTransferFactory" type="ZingyBits\CitizenCore\Gateway\Http\PaymentTransferFactory">
+        <arguments>
+            <argument name="mapper" xsi:type="object">ZingyBits\CitizenCore\Gateway\Request\Mapper\PaymentCreateRequestMapper</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Payment Status Response handler -->
+    <virtualType name="CitizenPaymentGatewayCreateResponseHandlerComposite" type="Magento\Payment\Gateway\Response\HandlerChain">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="change_order_status" xsi:type="string">ZingyBits\CitizenCore\Gateway\Response\PaymentStatusHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <!--  Payment Status Validator   -->
+    <virtualType name="CitizenPaymentCreateValidator" type="Magento\Payment\Gateway\Validator\ValidatorComposite">
+        <arguments>
+            <argument name="validators" xsi:type="array">
+                <item name="gateway_response_valid" xsi:type="string">ZingyBits\CitizenCore\Gateway\Validator\GatewayResponseValidator</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Value handlers infrastructure -->
+    <virtualType name="CitizenPaymentGatewayValueHandlerPool" type="Magento\Payment\Gateway\Config\ValueHandlerPool">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="default" xsi:type="string">CitizenPaymentGatewayConfigValueHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="CitizenPaymentGatewayConfigValueHandler" type="Magento\Payment\Gateway\Config\ConfigValueHandler">
+        <arguments>
+            <argument name="configInterface" xsi:type="object">CitizenPaymentGatewayConfig</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Payment Check command -->
+    <virtualType name="CitizenPaymentPayInCheckCommand" type="ZingyBits\CitizenCore\Gateway\Command\ResponseCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">CitizenPaymentGatewayCheckRequestBuilderComposite</argument>
+            <argument name="transferFactory" xsi:type="object">CitizenPaymentGatewayCheckTransferFactory</argument>
+            <argument name="client" xsi:type="object">ZingyBits\CitizenCore\Gateway\Http\Client\Curl</argument>
+            <argument name="handler" xsi:type="object">CitizenPaymentPayInCheckGetResponseHandlerComposite</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Pay-In Session Check Request Builder -->
+    <virtualType name="CitizenPaymentGatewayCheckRequestBuilderComposite" type="Magento\Payment\Gateway\Request\BuilderComposite">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="pay_in_session_create_builder" xsi:type="string">ZingyBits\CitizenCore\Gateway\Request\PayInSessionCheckDataBuilder</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <!-- Pay-In Session Check Transfer Factory -->
+    <virtualType name="CitizenPaymentGatewayCheckTransferFactory" type="ZingyBits\CitizenCore\Gateway\Http\PaymentTransferFactory">
+        <arguments>
+            <argument name="mapper" xsi:type="object">ZingyBits\CitizenCore\Gateway\Request\Mapper\PayInSessionCheckRequestMapper</argument>
+        </arguments>
+    </virtualType>
+    <!-- Payment Status handler -->
+    <virtualType name="CitizenPaymentPayInCheckGetResponseHandlerComposite" type="Magento\Payment\Gateway\Response\HandlerChain">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="add_new_transaction" xsi:type="string">ZingyBits\CitizenCore\Gateway\Response\SaveTransactionHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- ConfigInterface instantiation -->
+    <type name="ZingyBits\CitizenCore\Model\Config">
+        <arguments>
+            <argument name="config" xsi:type="object">CitizenPaymentGatewayConfig</argument>
+        </arguments>
+    </type>
+
+</config>
