@@ -95,6 +95,9 @@
                 <field id="send_mail_after_complete" type="select" sortOrder="135" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
                     <label>Send email after payment complete</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
                 </field>
 				<field id="sort_order" type="text" sortOrder="140" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
 					<label>Sort Order</label>
