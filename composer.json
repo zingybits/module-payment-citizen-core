@@ -2,7 +2,7 @@
     "name": "zingybits/module-payment-citizen-core",
     "description": "Citizen payment module for Magento 2 - core part",
     "type": "magento2-module",
-    "version": "1.0.0",
+    "version": "2.0.2",
     "license": "GPL-3.0",
     "require": {
         "magento/framework": "*",
