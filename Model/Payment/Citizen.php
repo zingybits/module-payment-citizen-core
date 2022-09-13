@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Citizen payment gateway by ZingyBits - Magento 2 extension
  *
@@ -14,14 +13,12 @@
  * @license http://www.zingybits.com/business-license
  * @author ZingyBits s.r.o. <support@zingybits.com>
  */
-
 declare(strict_types=1);
 
 namespace ZingyBits\CitizenCore\Model\Payment;
 
 class Citizen extends \Magento\Payment\Model\Method\AbstractMethod
 {
-
     protected $_code = "citizen";
     protected $_isOffline = true;
 

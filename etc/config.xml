@@ -5,16 +5,28 @@
 			<citizen>
 				<active>0</active>
 				<model>ZingyBits\CitizenCore\Model\Payment\Citizen</model>
-				<title>Citizen</title>
+				<title>Cardless payment</title>
 				<allowspecific>0</allowspecific>
 				<group>offline</group>
 				<public_key></public_key>
 				<private_key></private_key>
 				<merchant_email></merchant_email>
-				<gateway_api_url>https://testapi.paywithcitizen.com/v2</gateway_api_url>
+				<is_production>0</is_production>
+                <registration_url>https://admin.paywithcitizen.com/#/register</registration_url>
+                <phrase_title>Use your bank app | No typing needed</phrase_title>
+                <desktop_desc>We'll show you a QR code so you can select your banks app to complete the payment</desktop_desc>
+                <desktop_button_text>Generate QR code to pay</desktop_button_text>
+                <mobile_button_text>Continue to pay</mobile_button_text>
+				<url_gateway_api_prod>https://api.paywithcitizen.com/v2</url_gateway_api_prod>
+				<url_gateway_api_test>https://testapi.paywithcitizen.com/v2</url_gateway_api_test>
+                <url_sdk_prod>https://sdk.paywithcitizen.com/v6/sdk/sdk-payin.js</url_sdk_prod>
+                <url_sdk_test>https://test-sdk.paywithcitizen.com/v6/sdk/sdk-payin.js</url_sdk_test>
+                <order_place_redirect_url>1</order_place_redirect_url>
+                <send_mail_after_complete>0</send_mail_after_complete>
                 <advanced>
                     <cms_payment_failure>citizen/payment/failure</cms_payment_failure>
                     <cms_payment_success>checkout/onepage/success</cms_payment_success>
+                    <cancel_order_on_cancelled_payment>0</cancel_order_on_cancelled_payment>
                     <log_all_communication>0</log_all_communication>
                 </advanced>
 			</citizen>

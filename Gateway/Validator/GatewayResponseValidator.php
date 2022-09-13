@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Citizen payment gateway by ZingyBits - Magento 2 extension
  *
@@ -14,12 +13,10 @@
  * @license http://www.zingybits.com/business-license
  * @author ZingyBits s.r.o. <support@zingybits.com>
  */
-
 declare(strict_types=1);
 
 namespace ZingyBits\CitizenCore\Gateway\Validator;
 
-use ZingyBits\CitizenCore\Gateway\Config\Config;
 use Magento\Payment\Gateway\Helper\SubjectReader;
 use Magento\Payment\Gateway\Validator\AbstractValidator;
 use Magento\Payment\Gateway\Validator\ResultInterface;
@@ -85,7 +82,7 @@ class GatewayResponseValidator extends AbstractValidator
     {
         $isError = false;
 
-        if(isset($response['errors']) ){
+        if (isset($response['errors'])) {
             $isError = true;
             foreach ($response['errors'] as $error) {
                 $message = "PaymentResultValidator - {$error['message']}. Error code = {$error['error_code']}. Field - {$error['field']}";
@@ -93,6 +90,7 @@ class GatewayResponseValidator extends AbstractValidator
                 $this->logger->error($message);
             }
         }
+
         return $isError;
     }
 }

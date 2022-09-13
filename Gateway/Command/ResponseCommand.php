@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Citizen payment gateway by ZingyBits - Magento 2 extension
  *
@@ -14,7 +13,6 @@
  * @license http://www.zingybits.com/business-license
  * @author ZingyBits s.r.o. <support@zingybits.com>
  */
-
 declare(strict_types=1);
 
 namespace ZingyBits\CitizenCore\Gateway\Command;
@@ -88,11 +86,8 @@ class ResponseCommand implements CommandInterface
 
     /**
      * Execute command and pass on its result
-     *
      * @param array $commandSubject
-     * @return \Magento\Payment\Gateway\Command\Result\ArrayResult|\Magento\Payment\Gateway\Command\ResultInterface|null
-     * @throws \Magento\Payment\Gateway\Http\ClientException
-     * @throws \Magento\Payment\Gateway\Http\ConverterException
+     * @return array
      */
     public function execute(array $commandSubject)
     {
@@ -101,7 +96,7 @@ class ResponseCommand implements CommandInterface
         $response = $this->client->placeRequest($transferObject);
         $result['response'] = $response;
 
-        // todo validation
+        // validation
         if ($this->validator !== null) {
             $validation = $this->validator->validate(
                 array_merge($commandSubject, ['response' => $response])

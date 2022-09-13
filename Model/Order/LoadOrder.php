@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Citizen payment gateway by ZingyBits - Magento 2 extension
  *
@@ -14,16 +13,15 @@
  * @license http://www.zingybits.com/business-license
  * @author ZingyBits s.r.o. <support@zingybits.com>
  */
-
 declare(strict_types=1);
 
 namespace ZingyBits\CitizenCore\Model\Order;
 
 use Magento\Quote\Model\QuoteFactory;
-use Psr\Log\LoggerInterface;
 use Magento\Quote\Model\MaskedQuoteIdToQuoteIdInterface;
 use Magento\Sales\Model\OrderFactory;
 use Magento\Framework\App\RequestInterface;
+use Psr\Log\LoggerInterface;
 
 class LoadOrder
 {
@@ -37,15 +35,20 @@ class LoadOrder
     private $maskToQuoteId;
     private $orderFactory;
     private $request;
+    private $order;
 
-
+    /**
+     * @param QuoteFactory $quoteFactory
+     * @param LoggerInterface $logger
+     * @param MaskedQuoteIdToQuoteIdInterface $maskToQuoteId
+     * @param OrderFactory $orderFactory
+     */
     public function __construct(
         QuoteFactory                    $quoteFactory,
         LoggerInterface                 $logger,
         MaskedQuoteIdToQuoteIdInterface $maskToQuoteId,
         OrderFactory                    $orderFactory
-    )
-    {
+    ) {
         $this->quoteFactory = $quoteFactory;
         $this->logger = $logger;
         $this->maskToQuoteId = $maskToQuoteId;
@@ -53,6 +56,10 @@ class LoadOrder
     }
 
 
+    /**
+     * @param RequestInterface $request
+     * @return mixed
+     */
     public function getOrder(RequestInterface $request)
     {
         $this->request = $request;
@@ -78,11 +85,12 @@ class LoadOrder
             throw new \InvalidArgumentException('no order loaded');
         }
 
-
         return $this->order;
     }
 
-
+    /**
+     * @return string|null
+     */
     private function getOrderIdByQuoteId()
     {
         $quoteId = $this->request->getParam(self::QUOTE_ID_PARAM);
@@ -106,5 +114,4 @@ class LoadOrder
 
         return null;
     }
-
 }

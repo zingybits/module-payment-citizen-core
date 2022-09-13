@@ -2,12 +2,10 @@
     "name": "zingybits/module-payment-citizen-core",
     "description": "Citizen payment module for Magento 2 - core part",
     "type": "magento2-module",
-    "version": "1.0.1",
+    "version": "1.0.0",
     "license": "GPL-3.0",
     "require": {
-        "php": ">=7.1.0",
         "magento/framework": "*",
-        "magento/magento-composer-installer": "*",
         "magento/module-checkout": "*",
         "magento/module-config": "*",
         "magento/module-payment": "*",
@@ -17,7 +15,7 @@
         "ext-curl": "*",
         "ext-json": "*",
         "ext-openssl": "*"
-    },    
+    },
     "authors": [
         {
             "name": "ZingyBits",

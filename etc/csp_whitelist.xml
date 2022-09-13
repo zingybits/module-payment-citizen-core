@@ -1,34 +1,105 @@
 <?xml version="1.0"?>
 <csp_whitelist xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Csp/etc/csp_whitelist.xsd">
     <policies>
-        <policy id="script-src">
+        <policy id="default-src">
             <values>
                 <value id="citizen" type="host">*.citizen.is</value>
-                <value id="citizen" type="host">*.paywithcitizen.com</value>
-            </values>
-        </policy>
-        <policy id="style-src">
-            <values>
-                <value id="citizen" type="host">*.citizen.is</value>
-                <value id="citizen" type="host">*.paywithcitizen.com</value>
-            </values>
-        </policy>
-        <policy id="img-src">
-            <values>
-                <value id="citizen" type="host">*.citizen.is</value>
-                <value id="citizen" type="host">*.paywithcitizen.com</value>
+                <value id="paywithcitizen" type="host">*.paywithcitizen.com</value>
+                <value id="cloudflare" type="host">*.cloudflare.com</value>
+                <value id="test-sdk" type="host">https://test-sdk.paywithcitizen.com</value>
+                <value id="live-sdk" type="host">https://sdk.paywithcitizen.com</value>
             </values>
         </policy>
         <policy id="connect-src">
             <values>
                 <value id="citizen" type="host">*.citizen.is</value>
-                <value id="citizen" type="host">*.paywithcitizen.com</value>
+                <value id="paywithcitizen" type="host">*.paywithcitizen.com</value>
+                <value id="cloudflare" type="host">*.cloudflare.com</value>
+                <value id="test-wsswebsocket" type="host">wss://testapi.paywithcitizen.com/v2/webapp/payin-socket/websocket</value>
+                <value id="live-wsswebsocket" type="host">wss://api.paywithcitizen.com/v2/webapp/payin-socket/websocket</value>
+                <value id="test-sdk" type="host">https://test-sdk.paywithcitizen.com</value>
+                <value id="live-sdk" type="host">https://sdk.paywithcitizen.com</value>
+            </values>
+        </policy>
+        <policy id="child-src">
+            <values>
+                <value id="citizen" type="host">*.citizen.is</value>
+                <value id="paywithcitizen" type="host">*.paywithcitizen.com</value>
+                <value id="cloudflare" type="host">*.cloudflare.com</value>
+                <value id="test-sdk" type="host">https://test-sdk.paywithcitizen.com</value>
+                <value id="live-sdk" type="host">https://sdk.paywithcitizen.com</value>
             </values>
         </policy>
         <policy id="font-src">
             <values>
                 <value id="citizen" type="host">*.citizen.is</value>
-                <value id="citizen" type="host">*.paywithcitizen.com</value>
+                <value id="paywithcitizen" type="host">*.paywithcitizen.com</value>
+                <value id="cloudflare" type="host">*.cloudflare.com</value>
+                <value id="test-sdk" type="host">https://test-sdk.paywithcitizen.com</value>
+                <value id="live-sdk" type="host">https://sdk.paywithcitizen.com</value>
+            </values>
+        </policy>
+        <policy id="frame-src">
+            <values>
+                <value id="citizen" type="host">*.citizen.is</value>
+                <value id="paywithcitizen" type="host">*.paywithcitizen.com</value>
+                <value id="cloudflare" type="host">*.cloudflare.com</value>
+                <value id="test-sdk" type="host">https://test-sdk.paywithcitizen.com</value>
+                <value id="live-sdk" type="host">https://sdk.paywithcitizen.com</value>
+            </values>
+        </policy>
+        <policy id="img-src">
+            <values>
+                <value id="citizen" type="host">*.citizen.is</value>
+                <value id="paywithcitizen" type="host">*.paywithcitizen.com</value>
+                <value id="cloudflare" type="host">*.cloudflare.com</value>
+                <value id="test-sdk" type="host">https://test-sdk.paywithcitizen.com</value>
+                <value id="live-sdk" type="host">https://sdk.paywithcitizen.com</value>
+            </values>
+        </policy>
+        <policy id="manifest-src">
+            <values>
+                <value id="citizen" type="host">*.citizen.is</value>
+                <value id="paywithcitizen" type="host">*.paywithcitizen.com</value>
+                <value id="cloudflare" type="host">*.cloudflare.com</value>
+                <value id="test-sdk" type="host">https://test-sdk.paywithcitizen.com</value>
+                <value id="live-sdk" type="host">https://sdk.paywithcitizen.com</value>
+            </values>
+        </policy>
+        <policy id="media-src">
+            <values>
+                <value id="citizen" type="host">*.citizen.is</value>
+                <value id="paywithcitizen" type="host">*.paywithcitizen.com</value>
+                <value id="cloudflare" type="host">*.cloudflare.com</value>
+                <value id="test-sdk" type="host">https://test-sdk.paywithcitizen.com</value>
+                <value id="live-sdk" type="host">https://sdk.paywithcitizen.com</value>
+            </values>
+        </policy>
+        <policy id="object-src">
+            <values>
+                <value id="citizen" type="host">*.citizen.is</value>
+                <value id="paywithcitizen" type="host">*.paywithcitizen.com</value>
+                <value id="cloudflare" type="host">*.cloudflare.com</value>
+                <value id="test-sdk" type="host">https://test-sdk.paywithcitizen.com</value>
+                <value id="live-sdk" type="host">https://sdk.paywithcitizen.com</value>
+            </values>
+        </policy>
+        <policy id="script-src">
+            <values>
+                <value id="citizen" type="host">*.citizen.is</value>
+                <value id="paywithcitizen" type="host">*.paywithcitizen.com</value>
+                <value id="cloudflare" type="host">*.cloudflare.com</value>
+                <value id="test-sdk" type="host">https://test-sdk.paywithcitizen.com</value>
+                <value id="live-sdk" type="host">https://sdk.paywithcitizen.com</value>
+            </values>
+        </policy>
+        <policy id="style-src">
+            <values>
+                <value id="citizen" type="host">*.citizen.is</value>
+                <value id="paywithcitizen" type="host">*.paywithcitizen.com</value>
+                <value id="cloudflare" type="host">*.cloudflare.com</value>
+                <value id="test-sdk" type="host">https://test-sdk.paywithcitizen.com</value>
+                <value id="live-sdk" type="host">https://sdk.paywithcitizen.com</value>
             </values>
         </policy>
     </policies>

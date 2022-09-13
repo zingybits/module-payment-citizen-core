@@ -10,45 +10,109 @@
 				</field>
 				<field id="title" type="text" sortOrder="20" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
 					<label>Title</label>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
 				</field>
-				<field id="public_key" translate="label" type="text" sortOrder="21" showInDefault="1" showInWebsite="1" showInStore="0">
+				<field id="public_key" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
 					<label>Client Public Key</label>
                     <validate>required-entry</validate>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
 				</field>
-				<field id="private_key" translate="label" type="text" sortOrder="22" showInDefault="1" showInWebsite="1" showInStore="0">
+				<field id="private_key" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0">
 					<label>Client Private Key</label>
                     <validate>required-entry</validate>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
 				</field>
-                <field id="gateway_api_url" type="select" translate="label" sortOrder="23" showInWebsite="1" showInStore="1" showInDefault="1">
-                    <label>Gateway api url</label>
-                    <source_model>ZingyBits\CitizenCore\Model\CreateSessionUrlOptions</source_model>
+                <field id="create_account" translate="label" type="button" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <frontend_model>ZingyBits\CitizenCore\Block\System\Config\Form\Field\Register</frontend_model>
+                    <label>Create Account</label>
                 </field>
-                <field id="merchant_email" translate="label" type="text" sortOrder="24" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="is_production" type="select" translate="label" sortOrder="23" showInWebsite="1" showInStore="1" showInDefault="1">
+                    <label>Production mode</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>If set to No, the sandbox testing API will be used</comment>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+                <field id="merchant_email" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Merchant email</label>
                     <validate>required-entry</validate>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
                 </field>
-                <field id="allowspecific" type="allowspecific" sortOrder="25" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                <field id="allowspecific" type="allowspecific" sortOrder="80" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
                     <label>Payment from Applicable Countries</label>
                     <source_model>Magento\Payment\Model\Config\Source\Allspecificcountries</source_model>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
                 </field>
-
-				<field id="specificcountry" type="multiselect" sortOrder="50" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+				<field id="specificcountry" type="multiselect" sortOrder="90" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
 					<label>Payment from Applicable Countries</label>
 					<source_model>Magento\Directory\Model\Config\Source\Country</source_model>
 					<can_be_empty>1</can_be_empty>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
 				</field>
-				<field id="sort_order" type="text" sortOrder="60" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+
+
+                <field id="phrase_title" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Under title text</label>
+                    <validate>required-entry</validate>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+                <field id="desktop_desc" translate="label" type="text" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>QR code notification text</label>
+                    <validate>required-entry</validate>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+                <field id="desktop_button_text" translate="label" type="text" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Button text for desktop screens</label>
+                    <validate>required-entry</validate>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+                <field id="mobile_button_text" translate="label" type="text" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Button text for Mobile screens</label>
+                    <validate>required-entry</validate>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+                <field id="send_mail_after_complete" type="select" sortOrder="135" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                    <label>Send email after payment complete</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+				<field id="sort_order" type="text" sortOrder="140" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
 					<label>Sort Order</label>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
 				</field>
-				<field id="instructions" type="textarea" sortOrder="70" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
-					<label>Instructions</label>
-				</field>
-				<group id="advanced" translate="label" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                <group id="advanced" translate="label" sortOrder="160" showInDefault="1" showInWebsite="1" showInStore="1">
 					<label>Advanced Settings</label>
 					<depends>
 						<field id="active">1</field>
 					</depends>
-					<field id="log_all_communication" translate="label" type="select" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <field id="cancel_order_on_cancelled_payment" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Cancel order on cancelled payments</label>
+                        <comment>When the payment is cancelled by user any time during the transaction, also cancel the whole order in Magento</comment>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+					<field id="log_all_communication" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
 						<label>Log all gateway communication</label>
 						<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
 					</field>

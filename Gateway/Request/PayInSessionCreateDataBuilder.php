@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Citizen payment gateway by ZingyBits - Magento 2 extension
  *
@@ -14,7 +13,6 @@
  * @license http://www.zingybits.com/business-license
  * @author ZingyBits s.r.o. <support@zingybits.com>
  */
-
 namespace ZingyBits\CitizenCore\Gateway\Request;
 
 use ZingyBits\CitizenCore\Model\Config;
@@ -26,6 +24,8 @@ use Magento\Payment\Gateway\Request\BuilderInterface;
 
 class PayInSessionCreateDataBuilder implements BuilderInterface
 {
+    const CONTROLLER_PATH_CALLBACK_RESPONSE = 'citizen/callback/response';
+
     /**
      * @var Config
      */
@@ -46,13 +46,18 @@ class PayInSessionCreateDataBuilder implements BuilderInterface
      */
     private $quoteIdToMaskedQuoteId;
 
+    /**
+     * @param Config $config
+     * @param StoreManager $storeManager
+     * @param Session $checkoutSession
+     * @param QuoteIdToMaskedQuoteIdInterface $quoteIdToMaskedQuoteId
+     */
     public function __construct(
         Config $config,
         StoreManager    $storeManager,
         Session $checkoutSession,
         QuoteIdToMaskedQuoteIdInterface $quoteIdToMaskedQuoteId
-    )
-    {
+    ) {
         $this->config = $config;
         $this->storeManager = $storeManager;
         $this->checkoutSession = $checkoutSession;
@@ -70,7 +75,7 @@ class PayInSessionCreateDataBuilder implements BuilderInterface
         $merchantEmail = $this->config->getMerchantEmail();
 
         $baseUrl = $this->storeManager->getStore()->getBaseUrl();
-        $callbackUrl = $baseUrl. 'citizen/callback/response';
+        $callbackUrl = $baseUrl . static::CONTROLLER_PATH_CALLBACK_RESPONSE;
 
         // todo customerDevise parse $_SERVER useragent
         $customerDeviceOS = 'NA';
@@ -91,8 +96,8 @@ class PayInSessionCreateDataBuilder implements BuilderInterface
             "reference" => $order->getOrderIncrementId(),
             "customerDeviceOs" => $customerDeviceOS,
             "customerIpAddress" => $order->getRemoteIp(),
-            "successRedirectUrl" => $callbackUrl.'?status=success',
-            "failureRedirectUrl" => $callbackUrl.'?status=failure'
+            "successRedirectUrl" => $callbackUrl . '?status=success',
+            "failureRedirectUrl" => $callbackUrl . '?status=failure'
         ];
 
         return $body;

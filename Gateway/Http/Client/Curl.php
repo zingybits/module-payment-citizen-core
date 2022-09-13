@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Citizen payment gateway by ZingyBits - Magento 2 extension
  *
@@ -14,12 +13,10 @@
  * @license http://www.zingybits.com/business-license
  * @author ZingyBits s.r.o. <support@zingybits.com>
  */
-
 declare(strict_types=1);
 
 namespace ZingyBits\CitizenCore\Gateway\Http\Client;
 
-use Magento\Framework\HTTP\Adapter;
 use Magento\Payment\Gateway\ConfigInterface;
 use Magento\Payment\Model\Method\Logger;
 use Magento\Payment\Gateway\Http\ClientException;
@@ -27,6 +24,7 @@ use Magento\Payment\Gateway\Http\ClientInterface;
 use Magento\Payment\Gateway\Http\TransferInterface;
 use Magento\Payment\Gateway\Http\ConverterInterface;
 use ZingyBits\CitizenCore\Gateway\Http\Converter\StringToZendResponse as ResponseFactory;
+use ZingyBits\CitizenCore\Gateway\Http\Adapter;
 
 /**
  * Class Curl

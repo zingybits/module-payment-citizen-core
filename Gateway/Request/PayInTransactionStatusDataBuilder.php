@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Citizen payment gateway by ZingyBits - Magento 2 extension
  *
@@ -14,28 +13,20 @@
  * @license http://www.zingybits.com/business-license
  * @author ZingyBits s.r.o. <support@zingybits.com>
  */
-
 namespace ZingyBits\CitizenCore\Gateway\Request;
 
-use ZingyBits\CitizenCore\Model\Config;
-use Magento\Checkout\Model\Session;
-use Magento\Quote\Model\QuoteIdToMaskedQuoteIdInterface;
-use Magento\Store\Model\StoreManagerInterface as StoreManager;
 use Magento\Payment\Gateway\Helper\SubjectReader;
 use Magento\Payment\Gateway\Request\BuilderInterface;
 
-class PayInSessionCheckDataBuilder implements BuilderInterface
+class PayInTransactionStatusDataBuilder implements BuilderInterface
 {
-
     public function build(array $buildSubject)
     {
-
         $paymentDO = SubjectReader::readPayment($buildSubject);
         $payment = $paymentDO->getPayment();
 
         $transactionId = $payment->getCcTransId() ?? null;
 
         return ['transactionId' => $transactionId] ;
-
     }
 }

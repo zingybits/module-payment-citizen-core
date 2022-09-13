@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Citizen payment gateway by ZingyBits - Magento 2 extension
  *
@@ -14,7 +13,6 @@
  * @license http://www.zingybits.com/business-license
  * @author ZingyBits s.r.o. <support@zingybits.com>
  */
-
 declare(strict_types=1);
 
 namespace ZingyBits\CitizenCore\Api;
@@ -52,6 +50,11 @@ interface ConfigInterface
     /**
      * @return string
      */
+    public function isProduction(): string;
+
+    /**
+     * @return string
+     */
     public function getClientEmail(): string;
 
     /**
@@ -84,4 +87,48 @@ interface ConfigInterface
      */
     public function getFailurePage(): string;
 
+    /**
+     * @return string
+     */
+    public function getRegistrationUrl(): string;
+
+    /**
+     * @return string
+     */
+    public function getCheckoutPhraseTitle(): string;
+
+    /**
+     * @return string
+     */
+    public function getCheckoutDesktopDesc(): string;
+
+    /**
+     * @return string
+     */
+    public function getCheckoutDesktopButtonText(): string;
+
+    /**
+     * @return string
+     */
+    public function getCheckoutMobileButtonText(): string;
+
+    /**
+     * @return string
+     */
+    public function getUrlProdSdk(): string;
+
+    /**
+     * @return string
+     */
+    public function getUrlTestSdk(): string;
+
+    /**
+     * @return string
+     */
+    public function getCancelOrderOnCancelledPayment(): bool;
+
+    /**
+     * @return string
+     */
+    public function canSendMailAfterComplete(): string;
 }

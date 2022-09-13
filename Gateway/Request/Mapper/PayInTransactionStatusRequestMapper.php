@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Citizen payment gateway by ZingyBits - Magento 2 extension
  *
@@ -14,25 +13,19 @@
  * @license http://www.zingybits.com/business-license
  * @author ZingyBits s.r.o. <support@zingybits.com>
  */
-
 declare(strict_types=1);
 
-namespace ZingyBits\CitizenCore\Gateway\Config\Enum\Payment;
+namespace ZingyBits\CitizenCore\Gateway\Request\Mapper;
 
 /**
- * Class Currency
- *
- * @package ZingyBits\CitizenCore\Gateway\Config\Enum\Payment
+ * Class PayInTransactionStatusRequestMapper
+ * @package ZingyBits\CitizenCore\Gateway\Request\Mapper
  */
-class Currency
+class PayInTransactionStatusRequestMapper extends AbstractRequestMapper
 {
-    const CZK = 'CZK';
-    const EUR = 'EUR';
-    const PLN = 'PLN';
-    const HUF = 'HUF';
-    const GBP = 'GBP';
-    const USD = 'USD';
-    const RON = 'RON';
-    const HRK = 'HRK';
-    const BGN = 'BGN';
+    public const URI_SUFFIX = 'payins/{transactionId}';
+    public const TRANSFER_METHOD = 'GET';
+    public const DYNAMIC_CONFIG_PARAMS_MAPPING = [
+        'transactionId' => 'transactionId'
+    ];
 }

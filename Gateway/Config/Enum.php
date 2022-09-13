@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Citizen payment gateway by ZingyBits - Magento 2 extension
  *
@@ -14,13 +13,10 @@
  * @license http://www.zingybits.com/business-license
  * @author ZingyBits s.r.o. <support@zingybits.com>
  */
-
 declare(strict_types=1);
 
 namespace ZingyBits\CitizenCore\Gateway\Config;
 
-use ZingyBits\CitizenCore\Gateway\Config\Enum\Payment\PaymentInstrument;
-use ZingyBits\CitizenCore\Gateway\Config\Enum\Payment\Currency;
 use ZingyBits\CitizenCore\Gateway\Config\Enum\Response\PaymentStatus;
 use ZingyBits\CitizenCore\Api\ConfigInterface as ApiConfig;
 
@@ -51,7 +47,6 @@ class Enum
         PaymentStatus::ERROR => ApiConfig::CITIZEN_ORDER_STATUS_CANCELLED
     ];
 
-
     public const TERMINAL_STATUSES_SUCCESS_PAGE = [
         PaymentStatus::ACCEPTED
     ];
@@ -66,32 +61,4 @@ class Enum
     public const TERMINAL_STATUSES_ERROR = [
         PaymentStatus::ERROR
     ];
-
-    public const AVAILABLE_CURRENCIES = [
-        Currency::CZK,
-        Currency::EUR,
-        Currency::PLN,
-        Currency::USD,
-        Currency::GBP,
-        Currency::HUF,
-        Currency::RON,
-        Currency::BGN,
-        Currency::HRK,
-    ];
-
-
-    public const AVAILABLE_PAYMENT_METHODS = [
-        PaymentInstrument::PAYMENT_CARD => 'Payment card',
-        PaymentInstrument::BANK_ACCOUNT => 'Bank account',
-        PaymentInstrument::GPAY => 'Google Pay',
-        PaymentInstrument::APPLE_PAY => 'Apple Pay',
-        PaymentInstrument::CITIZEN => 'Citizen wallet',
-        PaymentInstrument::PAYPAL => 'PayPal wallet',
-        PaymentInstrument::MPAYMENT => 'mPlatba (mobile payment)',
-        PaymentInstrument::PRSMS => 'Premium SMS',
-        PaymentInstrument::PAYSAFECARD => 'PaySafeCard coupon',
-        PaymentInstrument::BITCOIN => 'Bitcoin wallet',
-    ];
-
-
 }

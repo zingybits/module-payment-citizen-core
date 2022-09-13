@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Citizen payment gateway by ZingyBits - Magento 2 extension
  *
@@ -14,29 +13,24 @@
  * @license http://www.zingybits.com/business-license
  * @author ZingyBits s.r.o. <support@zingybits.com>
  */
-
 declare(strict_types=1);
 
 namespace ZingyBits\CitizenCore\Gateway\Response;
 
 use Magento\Payment\Gateway\Helper\SubjectReader;
 use Magento\Sales\Model\Order\Payment;
-use ZingyBits\CitizenCore\Gateway\Config\Config;
-use ZingyBits\CitizenCore\Gateway\Config\Config as GatewayConfig;
-use ZingyBits\CitizenCore\Gateway\Config\Enum\Response\PaymentStatus;
-use ZingyBits\CitizenCore\Api\ConfigInterface as ApiConfig;
 use Magento\Payment\Gateway\Response\HandlerInterface;
 use Magento\Sales\Api\OrderPaymentRepositoryInterface;
 use Magento\Sales\Api\OrderRepositoryInterface;
 use Magento\Sales\Model\Order;
+use ZingyBits\CitizenCore\Gateway\Config\Config as GatewayConfig;
 use ZingyBits\CitizenCore\Model\Order\OrderStatus;
 
 /**
- * class PaymentStatusHandler
+ * class TransactionStatusHandler
  */
-class SaveTransactionHandler implements HandlerInterface
+class TransactionStatusHandler implements HandlerInterface
 {
-
     /**
      * @var OrderPaymentRepositoryInterface
      */
@@ -70,23 +64,21 @@ class SaveTransactionHandler implements HandlerInterface
      */
     public function handle(array $handlingSubject, array $response): void
     {
-
         $paymentDO = SubjectReader::readPayment($handlingSubject);
-        /** @var Payment $payment */
         $payment = $paymentDO->getPayment();
-        /** @var Order $order */
         $order = $payment->getOrder();
 
-        $paymentStatusGateway = $response[Config::GATEWAY_RESPONSE_TRANSACTION_STATUS] ?? 'null';
-        if ($paymentStatusGateway=='null') return;
+        $paymentStatusGateway = $response[GatewayConfig::GATEWAY_RESPONSE_TRANSACTION_STATUS] ?? 'null';
+        if (! $paymentStatusGateway) {
+            return;
+        }
 
         $paymentStatusOrder = $order->getStatus();
         $order->setState(Order::STATE_PROCESSING);
 
         if ($paymentStatusGateway && ($paymentStatusGateway !== $paymentStatusOrder)) {
-            // if status changed return true; else false
+            // return true if status change has been successful
             $isChanged = $this->orderStatus->changeStatus($order, $paymentStatusGateway);
-
         }
     }
 }
