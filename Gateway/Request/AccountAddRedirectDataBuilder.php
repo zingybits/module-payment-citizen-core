@@ -23,7 +23,7 @@ use Magento\Store\Model\StoreManagerInterface;
 
 class AccountAddRedirectDataBuilder implements BuilderInterface
 {
-    const CONTROLLER_PATH_CALLBACK_RESPONSE = 'citizen/callback/response';
+    public const CONTROLLER_PATH_CALLBACK_RESPONSE = 'citizen/callback/response';
 
     /**
      * @var StoreManagerInterface StoreManager
@@ -40,6 +40,8 @@ class AccountAddRedirectDataBuilder implements BuilderInterface
     }
 
     /**
+     * Return callback url
+     *
      * @param array $buildSubject
      * @return array
      */

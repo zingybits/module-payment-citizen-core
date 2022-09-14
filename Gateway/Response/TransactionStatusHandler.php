@@ -26,9 +26,6 @@ use Magento\Sales\Model\Order;
 use ZingyBits\CitizenCore\Gateway\Config\Config as GatewayConfig;
 use ZingyBits\CitizenCore\Model\Order\OrderStatus;
 
-/**
- * class TransactionStatusHandler
- */
 class TransactionStatusHandler implements HandlerInterface
 {
     /**
@@ -44,6 +41,7 @@ class TransactionStatusHandler implements HandlerInterface
     /**
      * @param OrderRepositoryInterface $orderRepository
      * @param OrderPaymentRepositoryInterface $orderPaymentRepository
+     * @param OrderStatus $orderStatus
      */
     public function __construct(
         OrderRepositoryInterface $orderRepository,

@@ -24,12 +24,9 @@ use Magento\Payment\Gateway\Http\TransferFactoryInterface;
 use Magento\Payment\Gateway\Http\TransferInterface;
 use Psr\Log\LoggerInterface as Logger;
 
-/**
- * class PaymentTransferFactory
- */
 class PaymentTransferFactory implements TransferFactoryInterface
 {
-    const LOGGER_PREFIX = 'Citizen_payment_gateway::Gateway/PaymentTransferFactory - ';
+    public const LOGGER_PREFIX = 'Citizen_payment_gateway::Gateway/PaymentTransferFactory - ';
 
     /**
      * @var Logger
@@ -58,9 +55,9 @@ class PaymentTransferFactory implements TransferFactoryInterface
      * @param RequestMapperInterface $mapper
      */
     public function __construct(
-        Logger $logger,
-        ConfigInterface $config,
-        TransferBuilder $transferBuilder,
+        Logger                 $logger,
+        ConfigInterface        $config,
+        TransferBuilder        $transferBuilder,
         RequestMapperInterface $mapper
     ) {
         $this->logger = $logger;
@@ -80,30 +77,30 @@ class PaymentTransferFactory implements TransferFactoryInterface
         // build the REST API call URL
         $uriSuffix = $this->mapper->getUriSuffix();
 
-        if (! $uriSuffix) {
+        if (!$uriSuffix) {
             $this->logger->error(self::LOGGER_PREFIX . 'REST URI suffix must be provided');
             throw new \InvalidArgumentException('REST URI suffix must be provided');
         }
 
         // if dynamic params are part of the URL - map their values
-        if ( (strpos($uriSuffix, '{') !== false)
+        if ((strpos($uriSuffix, '{') !== false)
             && (strpos($uriSuffix, '}') !== false)
         ) {
             $staticParamsMapping = $this->mapper->getStaticParamsMapping();
-            if (! empty($staticParamsMapping)){
+            if (!empty($staticParamsMapping)) {
                 foreach ($staticParamsMapping as $urlVariable => $configCode) {
                     $configValue = $this->config->getValue($configCode);
                     if ($configValue) {
-                        $uriSuffix = str_replace('{'.$urlVariable.'}', $configValue, $uriSuffix);
+                        $uriSuffix = str_replace('{' . $urlVariable . '}', $configValue, $uriSuffix);
                     }
                 }
             }
             $dynamicParamsMapping = $this->mapper->getDynamicParamsMapping();
-            if (! empty($dynamicParamsMapping)){
+            if (!empty($dynamicParamsMapping)) {
                 foreach ($dynamicParamsMapping as $urlVariable => $paramCode) {
                     $configValue = $request[$paramCode] ?? null;
                     if ($configValue) {
-                        $uriSuffix = str_replace('{'.$urlVariable.'}', $configValue, $uriSuffix);
+                        $uriSuffix = str_replace('{' . $urlVariable . '}', $configValue, $uriSuffix);
                     }
                 }
             }
@@ -135,16 +132,15 @@ class PaymentTransferFactory implements TransferFactoryInterface
                 //;
         }
         if ($isHeadersAuthKeyRequired) {
-            if (! $headersAuthKey) {
+            if (!$headersAuthKey) {
                 $this->logger->error(self::LOGGER_PREFIX . 'Headers AuthKey must be provided');
                 throw new \InvalidArgumentException('Headers AuthKey must be provided');
             }
             $headers['AuthorizationCitizen'] = $headersAuthKey;
         }
 
-
         // GET method handling
-        if ('GET' === $this->mapper->getTransferMethod()){
+        if ('GET' === $this->mapper->getTransferMethod()) {
 
             return $this->transferBuilder
                 ->setMethod('GET')
@@ -154,7 +150,7 @@ class PaymentTransferFactory implements TransferFactoryInterface
         }
 
         // POST, PUT, PATCH.. methods handling
-        if ((! $request) || (! is_array($request))) {
+        if ((!$request) || (!is_array($request))) {
             $this->logger->error(self::LOGGER_PREFIX . 'Command request data built failed');
             throw new \UnexpectedValueException('Command request data built failed');
         }

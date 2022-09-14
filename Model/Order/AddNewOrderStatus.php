@@ -25,15 +25,11 @@ use Psr\Log\LoggerInterface;
 class AddNewOrderStatus
 {
     /**
-     * Status Factory
-     *
      * @var StatusFactory
      */
     protected $statusFactory;
 
     /**
-     * Status Resource Factory
-     *
      * @var StatusResourceFactory
      */
     protected $statusResourceFactory;
@@ -44,12 +40,11 @@ class AddNewOrderStatus
     protected $logger;
 
     /**
-     * AddNewOrderStatus constructor.
      * @param StatusFactory $statusFactory
      * @param StatusResourceFactory $statusResourceFactory
      * @param LoggerInterface $logger
      */
-    public function __construct (
+    public function __construct(
         StatusFactory $statusFactory,
         StatusResourceFactory $statusResourceFactory,
         LoggerInterface $logger
@@ -60,6 +55,8 @@ class AddNewOrderStatus
     }
 
     /**
+     * Create new order status
+     *
      * @param array $customOrderStatusData
      * @return void
      */
@@ -82,7 +79,8 @@ class AddNewOrderStatus
                 );
             }
             $this->logger->info(
-                'Created custom order status "' . $customOrderStatusData['status_label'] . '" with code "' . $customOrderStatusData['status_code'] . '"'
+                'Created custom order status "' . $customOrderStatusData['status_label']
+                . '" with code "' . $customOrderStatusData['status_code'] . '"'
             );
         } catch (AlreadyExistsException $e) {
             $this->logger->warning($e->getMessage());

@@ -23,10 +23,6 @@ use Magento\Payment\Gateway\Validator\ResultInterface;
 use Magento\Payment\Gateway\Validator\ResultInterfaceFactory;
 use Psr\Log\LoggerInterface;
 
-/**
- * Class GatewayResponseValidator
- * @package ZingyBits\CitizenCore\Gateway\Validator
- */
 class GatewayResponseValidator extends AbstractValidator
 {
     /**
@@ -47,7 +43,7 @@ class GatewayResponseValidator extends AbstractValidator
      */
     public function __construct(
         ResultInterfaceFactory $resultFactory,
-        LoggerInterface $logger
+        LoggerInterface        $logger
     ) {
         $this->logger = $logger;
         $this->errors = [];
@@ -60,7 +56,7 @@ class GatewayResponseValidator extends AbstractValidator
      * @param array $validationSubject
      * @return ResultInterface
      */
-    public function validate(array $validationSubject) : ResultInterface
+    public function validate(array $validationSubject): ResultInterface
     {
         $response = SubjectReader::readResponse($validationSubject);
 
@@ -75,6 +71,8 @@ class GatewayResponseValidator extends AbstractValidator
     }
 
     /**
+     * Validate result
+     *
      * @param array $response
      * @return bool
      */
@@ -85,7 +83,8 @@ class GatewayResponseValidator extends AbstractValidator
         if (isset($response['errors'])) {
             $isError = true;
             foreach ($response['errors'] as $error) {
-                $message = "PaymentResultValidator - {$error['message']}. Error code = {$error['error_code']}. Field - {$error['field']}";
+                $message = "PaymentResultValidator - {$error['message']}".
+                    "Error code = {$error['error_code']}. Field - {$error['field']}";
                 $this->errors[] = $message;
                 $this->logger->error($message);
             }

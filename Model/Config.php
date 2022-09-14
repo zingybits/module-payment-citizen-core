@@ -22,11 +22,6 @@ use Magento\Payment\Gateway\ConfigInterface as PaymentGatewayConfigInterface;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Store\Model\ScopeInterface;
 
-/**
- * Class Config
- *
- * @package ZingyBits\CitizenCore\Model
- */
 class Config implements CitizenConfigInterface
 {
     public const IS_ACTIVE = 'active';
@@ -44,7 +39,6 @@ class Config implements CitizenConfigInterface
     public const URL_TEST_SDK = 'url_sdk_test';
     public const CANCEL_ORDER_ON_CANCELLED_PAYMENT = 'cancel_order_on_cancelled_payment';
     public const SEND_MAIL_AFTER_COMPLETE = 'send_mail_after_complete';
-
     public const CHECKOUT_PHRASE_TITLE = 'phrase_title';
     public const CHECKOUT_DESKTOP_DESC = 'desktop_desc';
     public const CHECKOUT_DESKTOP_BUTTON_TEXT = 'desktop_button_text';
@@ -66,31 +60,61 @@ class Config implements CitizenConfigInterface
         $this->config = $config;
     }
 
+    /**
+     * Return the value of the config variable
+     *
+     * @return bool
+     */
     public function getIsActive(): bool
     {
         return (bool) $this->config->getValue(self::IS_ACTIVE);
     }
 
+    /**
+     * Return the value of the config variable
+     *
+     * @return string
+     */
     public function isProduction(): string
     {
         return (string) $this->config->getValue(self::IS_PRODUCTION);
     }
 
+    /**
+     * Return the value of the config variable
+     *
+     * @return string
+     */
     public function getClientEmail(): string
     {
         return (string) $this->config->getValue(self::CLIENT_EMAIL);
     }
 
+    /**
+     * Return the value of the config variable
+     *
+     * @return string
+     */
     public function getPrivateKey(): string
     {
         return (string) $this->config->getValue(self::PRIVATE_KEY);
     }
 
+    /**
+     * Return the value of the config variable
+     *
+     * @return string
+     */
     public function getPublicKey(): string
     {
         return (string) $this->config->getValue(self::PUBLIC_KEY);
     }
 
+    /**
+     * Return the value of the config variable
+     *
+     * @return string
+     */
     public function getGatewayApiUrl(): string
     {
         $urlGatewayApiProduction = (string) $this->config->getValue(self::URL_GATEWAY_API_PROD);
@@ -101,63 +125,123 @@ class Config implements CitizenConfigInterface
             : $urlGatewayApiTest;
     }
 
+    /**
+     * Return the value of the config variable
+     *
+     * @return string
+     */
     public function getMerchantEmail(): string
     {
         return (string) $this->config->getValue(self::MERCHANT_EMAIL);
     }
 
+    /**
+     * Return the value of the config variable
+     *
+     * @return string
+     */
     public function getSuccessPage(): string
     {
         return (string) $this->config->getValue(self::CMS_SUCCESS_PAGE);
     }
 
+    /**
+     * Return the value of the config variable
+     *
+     * @return string
+     */
     public function getFailurePage(): string
     {
         return (string) $this->config->getValue(self::CMS_FAILURE_PAGE);
     }
 
+    /**
+     * Return the value of the config variable
+     *
+     * @return string
+     */
     public function getRegistrationUrl(): string
     {
         return (string) $this->config->getValue(self::REGISTRATION_URL);
     }
 
+    /**
+     * Return the value of the config variable
+     *
+     * @return string
+     */
     public function getCheckoutPhraseTitle(): string
     {
         return (string) $this->config->getValue(self::CHECKOUT_PHRASE_TITLE);
     }
 
+    /**
+     * Return the value of the config variable
+     *
+     * @return string
+     */
     public function getCheckoutDesktopDesc(): string
     {
         return (string) $this->config->getValue(self::CHECKOUT_DESKTOP_DESC);
     }
 
+    /**
+     * Return the value of the config variable
+     *
+     * @return string
+     */
     public function getCheckoutDesktopButtonText(): string
     {
         return (string) $this->config->getValue(self::CHECKOUT_DESKTOP_BUTTON_TEXT);
     }
 
+    /**
+     * Return the value of the config variable
+     *
+     * @return string
+     */
     public function getCheckoutMobileButtonText(): string
     {
         return (string) $this->config->getValue(self::CHECKOUT_MOBILE_BUTTON_TEXT);
     }
 
+    /**
+     * Return the value of the config variable
+     *
+     * @return string
+     */
     public function getUrlTestSdk(): string
     {
         return (string) $this->config->getValue(self::URL_TEST_SDK);
     }
 
+    /**
+     * Return the value of the config variable
+     *
+     * @return string
+     */
     public function getUrlProdSdk(): string
     {
         return (string) $this->config->getValue(self::URL_PROD_SDK);
     }
 
+    /**
+     * Return the value of the config variable
+     *
+     * @return bool
+     */
     public function getCancelOrderOnCancelledPayment(): bool
     {
         return (bool) $this->config->getValue(self::CANCEL_ORDER_ON_CANCELLED_PAYMENT);
     }
+
+    /**
+     * Return the value of the config variable
+     *
+     * @return string
+     */
     public function canSendMailAfterComplete(): string
     {
         return (string) $this->config->getValue(self::SEND_MAIL_AFTER_COMPLETE);
     }
-
 }

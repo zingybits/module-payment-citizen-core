@@ -17,11 +17,6 @@ declare(strict_types=1);
 
 namespace ZingyBits\CitizenCore\Gateway\Request\Mapper;
 
-/**
- * Interface RequestMapperInterface
- * @package ZingyBits\CitizenCore\Gateway\Request\Mapper
- * @api
- */
 interface RequestMapperInterface
 {
     /**

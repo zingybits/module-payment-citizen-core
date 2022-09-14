@@ -17,10 +17,6 @@ declare(strict_types=1);
 
 namespace ZingyBits\CitizenCore\Gateway\Request\Mapper;
 
-/**
- * Class PayInSessionCreateRequestMapper
- * @package ZingyBits\CitizenCore\Gateway\Request\Mapper
- */
 class PayInSessionCreateRequestMapper extends AbstractRequestMapper
 {
     public const URI_SUFFIX = 'payins/session';

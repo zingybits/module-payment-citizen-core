@@ -25,10 +25,6 @@ use Magento\Sales\Api\Data\TransactionInterface as Transaction;
 use Magento\Payment\Gateway\Helper\SubjectReader;
 use Magento\Payment\Gateway\Response\HandlerInterface;
 
-/**
- * Class AddNewTransactionHandler
- * @package ZingyBits\CitizenCore\Gateway\Response
- */
 class AddNewTransactionHandler implements HandlerInterface
 {
     /**

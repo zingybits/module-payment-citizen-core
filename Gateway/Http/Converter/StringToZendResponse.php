@@ -19,9 +19,6 @@ namespace ZingyBits\CitizenCore\Gateway\Http\Converter;
 
 use Zend_Http_Response;
 
-/**
- * Class StringToZendResponse
- */
 class StringToZendResponse
 {
     /**

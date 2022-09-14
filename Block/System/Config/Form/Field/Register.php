@@ -29,10 +29,10 @@ class Register extends \Magento\Config\Block\System\Config\Form\Field
     protected $config;
 
     /**
+     * @param Config $config
      * @param Context $context
      * @param array $data
      * @param SecureHtmlRenderer|null $secureRenderer
-     * @param Config $config
      */
     public function __construct(
         Config $config,

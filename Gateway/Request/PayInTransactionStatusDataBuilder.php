@@ -20,6 +20,12 @@ use Magento\Payment\Gateway\Request\BuilderInterface;
 
 class PayInTransactionStatusDataBuilder implements BuilderInterface
 {
+    /**
+     * Build
+     *
+     * @param array $buildSubject
+     * @return null[]
+     */
     public function build(array $buildSubject)
     {
         $paymentDO = SubjectReader::readPayment($buildSubject);

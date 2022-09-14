@@ -17,18 +17,13 @@ declare(strict_types=1);
 
 namespace ZingyBits\CitizenCore\Gateway\Config\Enum\Response;
 
-/**
- * Class PaymentStatus
- *
- * @package ZingyBits\CitizenCore\Gateway\Config\Enum\Response
- */
 class PaymentStatus
 {
-    const CREATED = 'PENDING_USER_AUTHORISATION';
-    const INITIATED = 'INITIATED';
-    const ACCEPTED = 'ACCEPTED';
-    const CANCELED = 'CANCELLED';
-    const REJECTED = 'REJECTED_BY_ASPSP';
-    const FAILED = 'FAILED';
-    const ERROR = 'ERROR';
+    public const CREATED = 'PENDING_USER_AUTHORISATION';
+    public const INITIATED = 'INITIATED';
+    public const ACCEPTED = 'ACCEPTED';
+    public const CANCELED = 'CANCELLED';
+    public const REJECTED = 'REJECTED_BY_ASPSP';
+    public const FAILED = 'FAILED';
+    public const ERROR = 'ERROR';
 }

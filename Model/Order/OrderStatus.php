@@ -31,12 +31,38 @@ class OrderStatus
 {
     public const LOGGER_PREFIX = 'Citizen_Core::PaymentStatusChanger - ';
 
+    /**
+     * @var OrderRepositoryInterface
+     */
     private $orderRepository;
+
+    /**
+     * @var OrderPaymentRepositoryInterface
+     */
     private $orderPaymentRepository;
+
+    /**
+     * @var LoggerInterface
+     */
     private $logger;
+
+    /**
+     * @var Config
+     */
     private $config;
+
+    /**
+     * @var OrderSender
+     */
     private $orderSender;
 
+    /**
+     * @param OrderRepositoryInterface $orderRepository
+     * @param OrderPaymentRepositoryInterface $orderPaymentRepository
+     * @param LoggerInterface $logger
+     * @param Config $config
+     * @param OrderSender $orderSender
+     */
     public function __construct(
         OrderRepositoryInterface        $orderRepository,
         OrderPaymentRepositoryInterface $orderPaymentRepository,
@@ -52,11 +78,13 @@ class OrderStatus
     }
 
     /**
-     * @param $order
-     * @param $status
+     * Change order status
+     *
+     * @param Order $order
+     * @param string $status
      * @return bool
      */
-    public function changeStatus($order, $status): bool
+    public function changeStatus(Order $order, string $status): bool
     {
         $payment = $order->getPayment();
         $payment->setIsTransactionClosed(false);
@@ -69,7 +97,9 @@ class OrderStatus
                 case PaymentStatus::CREATED:
                     $order->setStatus(ConfigInterface::CITIZEN_ORDER_STATUS_PENDING_USER_AUTHORISATION);
                     $order->setState(Order::STATE_NEW);
-                    $order->addCommentToStatusHistory(ConfigInterface::CITIZEN_ORDER_STATUS_PENDING_USER_AUTHORISATION_COMMENT);
+                    $order->addCommentToStatusHistory(
+                        ConfigInterface::CITIZEN_ORDER_STATUS_PENDING_USER_AUTHORISATION_COMMENT
+                    );
                     break;
                 case PaymentStatus::ACCEPTED:
                     $order->setStatus(ConfigInterface::CITIZEN_ORDER_STATUS_ACCEPTED);
@@ -103,7 +133,9 @@ class OrderStatus
                 case PaymentStatus::REJECTED:
                     $order->setStatus(ConfigInterface::CITIZEN_ORDER_STATUS_REJECTED_BY_ASPSP);
                     $order->setState(Order::STATE_CANCELED);
-                    $order->addCommentToStatusHistory(ConfigInterface::CITIZEN_ORDER_STATUS_REJECTED_BY_ASPSP_COMMENT);
+                    $order->addCommentToStatusHistory(
+                        ConfigInterface::CITIZEN_ORDER_STATUS_REJECTED_BY_ASPSP_COMMENT
+                    );
                     $payment->setIsTransactionClosed(true);
                     break;
                 case PaymentStatus::FAILED:
@@ -126,7 +158,13 @@ class OrderStatus
         return false;
     }
 
-    public function getRedirectPageUrl($order)
+    /**
+     * Return redirect page
+     *
+     * @param Order $order
+     * @return string|null
+     */
+    public function getRedirectPageUrl(Order $order): ?string
     {
         $status = $order->getStatus();
         $redirectPageUrl = null;

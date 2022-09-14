@@ -1,5 +1,9 @@
 # Citizen Payment - core module - changelog
 
+## v2.0.3
+  * PHP CS
+    -- code cleanup to follow the static code analysis (https://developer.adobe.com/commerce/marketplace/guides/sellers/code-sniffer/)
+
 ## v2.0.2
   * Emails after order placed
     -- Suppress sending New Order emails straight after order has been created. Wait until the payment has been processed

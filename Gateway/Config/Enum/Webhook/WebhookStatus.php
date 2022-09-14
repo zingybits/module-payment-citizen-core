@@ -17,15 +17,10 @@ declare(strict_types=1);
 
 namespace ZingyBits\CitizenCore\Gateway\Config\Enum\Webhook;
 
-/**
- * Class WebhookStatus
- *
- * @package ZingyBits\CitizenCore\Gateway\Config\Enum\Webhook
- */
 class WebhookStatus
 {
-    const CREATED = 'PAYIN_CREATED';
-    const REDIRECTED = 'PAYIN_REDIRECT';
-    const DECISION = 'PAYIN_DECISION';
-    const ERROR = 'PAYIN_ERROR';
+    public const CREATED = 'PAYIN_CREATED';
+    public const REDIRECTED = 'PAYIN_REDIRECT';
+    public const DECISION = 'PAYIN_DECISION';
+    public const ERROR = 'PAYIN_ERROR';
 }

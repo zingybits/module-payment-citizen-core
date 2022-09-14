@@ -17,11 +17,13 @@ declare(strict_types=1);
 
 namespace ZingyBits\CitizenCore\Model\Order;
 
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Quote\Model\QuoteFactory;
 use Magento\Quote\Model\MaskedQuoteIdToQuoteIdInterface;
 use Magento\Sales\Model\OrderFactory;
 use Magento\Framework\App\RequestInterface;
 use Psr\Log\LoggerInterface;
+use Magento\Sales\Model\Order;
 
 class LoadOrder
 {
@@ -30,11 +32,34 @@ class LoadOrder
     public const ORDER_INCREMENT_ID_PARAM = 'orderId';
     public const QUOTE_ID_PARAM = 'qid';
 
+    /**
+     * @var QuoteFactory
+     */
     private $quoteFactory;
+
+    /**
+     * @var LoggerInterface
+     */
     private $logger;
+
+    /**
+     * @var MaskedQuoteIdToQuoteIdInterface
+     */
     private $maskToQuoteId;
+
+    /**
+     * @var OrderFactory
+     */
     private $orderFactory;
+
+    /**
+     * @var RequestInterface
+     */
     private $request;
+
+    /**
+     * @var Order
+     */
     private $order;
 
     /**
@@ -55,8 +80,9 @@ class LoadOrder
         $this->orderFactory = $orderFactory;
     }
 
-
     /**
+     * Return order
+     *
      * @param RequestInterface $request
      * @return mixed
      */
@@ -89,9 +115,12 @@ class LoadOrder
     }
 
     /**
+     * Return order by quoteId
+     *
      * @return string|null
+     * @throws NoSuchEntityException
      */
-    private function getOrderIdByQuoteId()
+    private function getOrderIdByQuoteId(): ?string
     {
         $quoteId = $this->request->getParam(self::QUOTE_ID_PARAM);
 

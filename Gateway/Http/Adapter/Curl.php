@@ -6,9 +6,6 @@
 
 namespace ZingyBits\CitizenCore\Gateway\Http\Adapter;
 
-/**
- * Curl http adapter
- */
 class Curl implements \Zend_Http_Client_Adapter_Interface
 {
     /**

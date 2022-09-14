@@ -26,9 +26,6 @@ use Magento\Payment\Gateway\Http\ConverterInterface;
 use ZingyBits\CitizenCore\Gateway\Http\Converter\StringToZendResponse as ResponseFactory;
 use ZingyBits\CitizenCore\Gateway\Http\Adapter;
 
-/**
- * Class Curl
- */
 class Curl implements ClientInterface
 {
     public const CONFIG_PATH_ALL_GATEWAY_COMMUNICATION = 'advanced/log_all_communication';
@@ -37,27 +34,27 @@ class Curl implements ClientInterface
     /**
      * HTTP protocol versions
      */
-    const HTTP_1 = '1.1';
-    const HTTP_0 = '1.0';
+    public const HTTP_1 = '1.1';
+    public const HTTP_0 = '1.0';
 
     /**
      * HTTP request methods
      */
-    const GET     = 'GET';
-    const POST    = 'POST';
-    const PUT     = 'PUT';
-    const HEAD    = 'HEAD';
-    const DELETE  = 'DELETE';
-    const TRACE   = 'TRACE';
-    const OPTIONS = 'OPTIONS';
-    const CONNECT = 'CONNECT';
-    const MERGE   = 'MERGE';
-    const PATCH   = 'PATCH';
+    public const GET     = 'GET';
+    public const POST    = 'POST';
+    public const PUT     = 'PUT';
+    public const HEAD    = 'HEAD';
+    public const DELETE  = 'DELETE';
+    public const TRACE   = 'TRACE';
+    public const OPTIONS = 'OPTIONS';
+    public const CONNECT = 'CONNECT';
+    public const MERGE   = 'MERGE';
+    public const PATCH   = 'PATCH';
 
     /**
      * Request timeout
      */
-    const REQUEST_TIMEOUT = 30;
+    public const REQUEST_TIMEOUT = 30;
 
     /**
      * @var ConverterInterface
@@ -166,6 +163,8 @@ class Curl implements ClientInterface
     }
 
     /**
+     * Return response body
+     *
      * @return string|null
      */
     public function read(): ?string
@@ -181,6 +180,8 @@ class Curl implements ClientInterface
     }
 
     /**
+     * Log response
+     *
      * @param $logEntry
      * @return void
      */
@@ -188,10 +189,12 @@ class Curl implements ClientInterface
     {
         // sanitize the token data
         if (isset($logEntry['response']['access_token'])) {
-            $logEntry['response']['access_token'] = substr($logEntry['response']['access_token'],0,10) . '*****';
+            $logEntry['response']['access_token'] =
+                substr($logEntry['response']['access_token'], 0, 10) . '*****';
         }
         if (isset($logEntry['response']['refresh_token'])) {
-            $logEntry['response']['refresh_token'] = substr($logEntry['response']['refresh_token'],0,10) . '*****';
+            $logEntry['response']['refresh_token'] =
+                substr($logEntry['response']['refresh_token'], 0, 10) . '*****';
         }
 
         file_put_contents(

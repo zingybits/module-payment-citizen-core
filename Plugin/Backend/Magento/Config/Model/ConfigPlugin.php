@@ -22,8 +22,8 @@ use ZingyBits\CitizenCore\Model\Config as ConfigGateway;
 
 class ConfigPlugin
 {
-    const PAY_IN_SUCCESS_REDIRECT = '/merchant/pay-in-success-redirect';
-    const PAY_IN_FAILURE_REDIRECT = '/merchant/pay-in-failure-redirect';
+    public const PAY_IN_SUCCESS_REDIRECT = '/merchant/pay-in-success-redirect';
+    public const PAY_IN_FAILURE_REDIRECT = '/merchant/pay-in-failure-redirect';
 
     /**
      * @var ConfigGateway
@@ -48,6 +48,8 @@ class ConfigPlugin
     }
 
     /**
+     * Sending requests before saving the configuration
+     *
      * @param \Magento\Config\Model\Config $subject
      * @return null
      */

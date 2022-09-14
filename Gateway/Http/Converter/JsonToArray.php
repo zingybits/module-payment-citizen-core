@@ -20,9 +20,6 @@ namespace ZingyBits\CitizenCore\Gateway\Http\Converter;
 use Magento\Payment\Gateway\Http\ConverterException;
 use Magento\Payment\Gateway\Http\ConverterInterface;
 
-/**
- * Class JsonToArray
- */
 class JsonToArray implements ConverterInterface
 {
     /**

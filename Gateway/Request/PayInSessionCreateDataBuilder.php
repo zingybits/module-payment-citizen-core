@@ -24,7 +24,7 @@ use Magento\Payment\Gateway\Request\BuilderInterface;
 
 class PayInSessionCreateDataBuilder implements BuilderInterface
 {
-    const CONTROLLER_PATH_CALLBACK_RESPONSE = 'citizen/callback/response';
+    public const CONTROLLER_PATH_CALLBACK_RESPONSE = 'citizen/callback/response';
 
     /**
      * @var Config

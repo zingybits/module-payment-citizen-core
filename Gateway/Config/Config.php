@@ -17,11 +17,6 @@ declare(strict_types=1);
 
 namespace ZingyBits\CitizenCore\Gateway\Config;
 
-/**
- * Class Config
- *
- * @package ZingyBits\CitizenCore\Gateway\Config
- */
 class Config extends \Magento\Payment\Gateway\Config\Config
 {
     public const CODE = 'citizen';

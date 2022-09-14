@@ -23,12 +23,9 @@ use Magento\Payment\Gateway\Http\TransferFactoryInterface;
 use Magento\Payment\Gateway\Http\TransferInterface;
 use Psr\Log\LoggerInterface as Logger;
 
-/**
- * class PaymentTransferFactory
- */
 class AccountAddRedirectTransferFactory implements TransferFactoryInterface
 {
-    const LOGGER_PREFIX = 'Citizen_payment_gateway::Gateway/AccountAddRedirectTransferFactory - ';
+    public const LOGGER_PREFIX = 'Citizen_payment_gateway::Gateway/AccountAddRedirectTransferFactory - ';
 
     /**
      * @var Logger

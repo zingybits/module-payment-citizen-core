@@ -20,11 +20,6 @@ namespace ZingyBits\CitizenCore\Gateway\Config;
 use ZingyBits\CitizenCore\Gateway\Config\Enum\Response\PaymentStatus;
 use ZingyBits\CitizenCore\Api\ConfigInterface as ApiConfig;
 
-/**
- * Class Enum
- *
- * @package ZingyBits\CitizenCore\Gateway\Config
- */
 class Enum
 {
     public const TERMINAL_STATUSES = [

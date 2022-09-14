@@ -17,15 +17,29 @@ declare(strict_types=1);
 
 namespace ZingyBits\CitizenCore\Model\Payment;
 
+use Magento\Quote\Api\Data\CartInterface;
+
 class Citizen extends \Magento\Payment\Model\Method\AbstractMethod
 {
+    /**
+     * @var string
+     */
     protected $_code = "citizen";
+
+    /**
+     * @var bool
+     */
     protected $_isOffline = true;
 
+    /**
+     * Return quote is it available
+     *
+     * @param CartInterface|null $quote
+     * @return bool
+     */
     public function isAvailable(
-        \Magento\Quote\Api\Data\CartInterface $quote = null
-    ) {
+        CartInterface $quote = null
+    ): bool {
         return parent::isAvailable($quote);
     }
 }
-

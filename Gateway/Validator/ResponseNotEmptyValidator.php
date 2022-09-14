@@ -23,10 +23,6 @@ use Magento\Payment\Gateway\Validator\ResultInterface;
 use Magento\Payment\Gateway\Validator\ResultInterfaceFactory;
 use Psr\Log\LoggerInterface;
 
-/**
- * Class ResponseNotEmptyValidator
- * @package ZingyBits\CitizenCore\Gateway\Validator
- */
 class ResponseNotEmptyValidator extends AbstractValidator
 {
     /**

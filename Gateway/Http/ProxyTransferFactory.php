@@ -21,11 +21,6 @@ use Magento\Payment\Gateway\Http\TransferBuilder;
 use Magento\Payment\Gateway\Http\TransferFactoryInterface;
 use Magento\Payment\Gateway\Http\TransferInterface;
 
-/**
- * Class ProxyTransferFactory
- *
- * @package ZingyBits\CitizenCore\Gateway\Http
- */
 class ProxyTransferFactory implements TransferFactoryInterface
 {
     /**

@@ -18,16 +18,15 @@ declare(strict_types=1);
 namespace ZingyBits\CitizenCore\Gateway\Command;
 
 use Magento\Payment\Gateway\CommandInterface;
+use Magento\Payment\Gateway\Http\ClientException;
 use Magento\Payment\Gateway\Http\ClientInterface;
+use Magento\Payment\Gateway\Http\ConverterException;
 use Magento\Payment\Gateway\Http\TransferFactoryInterface;
 use Magento\Payment\Gateway\Request\BuilderInterface;
 use Magento\Payment\Gateway\Response\HandlerInterface;
 use Magento\Payment\Gateway\Validator\ValidatorInterface;
 use Magento\Payment\Gateway\Command\Result\ArrayResultFactory;
 
-/**
- * Class ResponseCommand
- */
 class ResponseCommand implements CommandInterface
 {
     /**
@@ -65,8 +64,8 @@ class ResponseCommand implements CommandInterface
      * @param TransferFactoryInterface $transferFactory
      * @param ClientInterface $client
      * @param ArrayResultFactory $resultFactory
-     * @param ValidatorInterface $validator
-     * @param HandlerInterface $handler
+     * @param ValidatorInterface|null $validator
+     * @param HandlerInterface|null $handler
      */
     public function __construct(
         BuilderInterface $requestBuilder,
@@ -86,8 +85,11 @@ class ResponseCommand implements CommandInterface
 
     /**
      * Execute command and pass on its result
+     *
      * @param array $commandSubject
      * @return array
+     * @throws ClientException
+     * @throws ConverterException
      */
     public function execute(array $commandSubject)
     {

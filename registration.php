@@ -18,4 +18,3 @@
 use Magento\Framework\Component\ComponentRegistrar;
 
 ComponentRegistrar::register(ComponentRegistrar::MODULE, 'ZingyBits_CitizenCore', __DIR__);
-

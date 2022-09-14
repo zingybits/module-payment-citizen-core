@@ -23,11 +23,6 @@ use Magento\Framework\Setup\ModuleDataSetupInterface;
 use Magento\Framework\Setup\Patch\DataPatchInterface;
 use Magento\Sales\Model\Order;
 
-/**
- * Class AddOrderStatuses
- *
- * @package ZingyBits\CitizenCore\Setup\Patch\Data
- */
 class AddOrderStatuses implements DataPatchInterface
 {
     private const NEW_ORDER_STATUSES = [
@@ -98,7 +93,7 @@ class AddOrderStatuses implements DataPatchInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function apply()
     {
@@ -110,7 +105,7 @@ class AddOrderStatuses implements DataPatchInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public static function getDependencies(): array
     {
@@ -118,7 +113,7 @@ class AddOrderStatuses implements DataPatchInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getAliases(): array
     {
