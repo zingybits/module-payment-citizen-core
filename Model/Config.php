@@ -29,8 +29,6 @@ class Config implements CitizenConfigInterface
     public const PUBLIC_KEY = 'public_key';
     public const PRIVATE_KEY = 'private_key';
     public const MERCHANT_EMAIL = 'merchant_email';
-    public const CMS_FAILURE_PAGE = 'advanced/cms_payment_failure';
-    public const CMS_SUCCESS_PAGE = 'advanced/cms_payment_success';
     public const REGISTRATION_URL = 'registration_url';
     public const IS_PRODUCTION = 'is_production';
     public const URL_GATEWAY_API_PROD = 'url_gateway_api_prod';
@@ -38,11 +36,14 @@ class Config implements CitizenConfigInterface
     public const URL_PROD_SDK = 'url_sdk_prod';
     public const URL_TEST_SDK = 'url_sdk_test';
     public const CANCEL_ORDER_ON_CANCELLED_PAYMENT = 'cancel_order_on_cancelled_payment';
-    public const SEND_MAIL_AFTER_COMPLETE = 'send_mail_after_complete';
-    public const CHECKOUT_PHRASE_TITLE = 'phrase_title';
-    public const CHECKOUT_DESKTOP_DESC = 'desktop_desc';
-    public const CHECKOUT_DESKTOP_BUTTON_TEXT = 'desktop_button_text';
-    public const CHECKOUT_MOBILE_BUTTON_TEXT = 'mobile_button_text';
+    public const CHECKOUT_TITLE = 'checkout/title';
+    public const CHECKOUT_PHRASE_TITLE = 'checkout/phrase_title';
+    public const CHECKOUT_DESKTOP_DESC = 'checkout/desktop_desc';
+    public const CHECKOUT_DESKTOP_BUTTON_TEXT = 'checkout/desktop_button_text';
+    public const CHECKOUT_MOBILE_BUTTON_TEXT = 'checkout/mobile_button_text';
+    public const SEND_MAIL_AFTER_COMPLETE = 'advanced/send_mail_after_complete';
+    public const CMS_FAILURE_PAGE = 'advanced/cms_payment_failure';
+    public const CMS_SUCCESS_PAGE = 'advanced/cms_payment_success';
 
     /**
      * @var PaymentGatewayConfigInterface
@@ -163,6 +164,16 @@ class Config implements CitizenConfigInterface
     public function getRegistrationUrl(): string
     {
         return (string) $this->config->getValue(self::REGISTRATION_URL);
+    }
+
+    /**
+     * Return the value of the config variable
+     *
+     * @return string
+     */
+    public function getCheckoutTitle(): string
+    {
+        return (string) $this->config->getValue(self::CHECKOUT_TITLE);
     }
 
     /**

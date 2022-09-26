@@ -1,5 +1,11 @@
 # Citizen Payment - core module - changelog
 
+## v2.0.5
+  * Admin config - changing the order of fields
+  
+## v2.0.4
+  * Admin settings cleanup
+
 ## v2.0.3
   * PHP CS
     -- code cleanup to follow the static code analysis (https://developer.adobe.com/commerce/marketplace/guides/sellers/code-sniffer/)

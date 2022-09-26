@@ -111,6 +111,13 @@ interface ConfigInterface
      *
      * @return string
      */
+    public function getCheckoutTitle(): string;
+
+    /**
+     * Return the value of the config variable
+     *
+     * @return string
+     */
     public function getCheckoutPhraseTitle(): string;
 
     /**
